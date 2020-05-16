@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "proxy-server",
   "version": "",
   "description": "",
   "author": "",
@@ -8,10 +8,22 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "start": "node server/index.js",
+    "server-dev": "nodemon server/index.js"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "nodemon": "^2.0.4"
   }
 }
