@@ -2,15 +2,20 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const proxy = require('express-http-proxy');
+const cors = require('cors');
+const config = require('../config.js');
 
-const PORT = 3000;
+const PORT = config.app.port;
 const app = express();
 
 app.use(morgan('dev'));
+app.use(cors())
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Question answer module
-app.use('/api/products/questions', proxy('http://ec2-18-191-175-115.us-east-2.compute.amazonaws.com/', {
+app.use('/question-answers', proxy(config.proxies.qna));
+
+app.use('/api/products/questions', proxy(config.proxies.qna, {
   proxyReqPathResolver: (req) => {
     const parts = req.url.split('?');
     const queryString = parts[1];
@@ -18,7 +23,7 @@ app.use('/api/products/questions', proxy('http://ec2-18-191-175-115.us-east-2.co
   },
 }));
 
-app.use('/api/products/answers', proxy('http://ec2-18-191-175-115.us-east-2.compute.amazonaws.com/', {
+app.use('/api/products/answers', proxy(config.proxies.qna, {
   proxyReqPathResolver: (req) => {
     const parts = req.url.split('?');
     const queryString = parts[1];
@@ -27,7 +32,9 @@ app.use('/api/products/answers', proxy('http://ec2-18-191-175-115.us-east-2.comp
 }));
 
 // Similar Products
-app.use('/api/similar_products/feedback', proxy('http://ec2-3-20-206-136.us-east-2.compute.amazonaws.com/api/similar_products/feedback', {
+app.use('/similar-products', proxy(config.proxies.similar));
+
+app.use('/api/similar_products/feedback', proxy(config.proxies.similar, {
   proxyReqPathResolver: (req) => {
     const parts = req.url.split('?');
     const queryString = parts[1];
@@ -35,7 +42,7 @@ app.use('/api/similar_products/feedback', proxy('http://ec2-3-20-206-136.us-east
   },
 }));
 
-app.use('/api/similar_products', proxy('http://ec2-3-20-206-136.us-east-2.compute.amazonaws.com/api/similar_products', {
+app.use('/api/similar_products', proxy(config.proxies.similar, {
   proxyReqPathResolver: (req) => {
     const parts = req.url.split('?');
     const queryString = parts[1];
@@ -44,11 +51,35 @@ app.use('/api/similar_products', proxy('http://ec2-3-20-206-136.us-east-2.comput
 }));
 
 // reviews
-app.use('/api/products/reviews', proxy('http://ec2-3-17-135-194.us-east-2.compute.amazonaws.com/', {
+app.use('/customer-reviews', proxy(config.proxies.reviews));
+
+app.use('/api/products/reviews', proxy(config.proxies.reviews, {
   proxyReqPathResolver: (req) => {
     const parts = req.url.split('?');
     const queryString = parts[1];
     return `/api/products/reviews${queryString ? `?${queryString}` : ''}`;
+  },
+}));
+
+// Images
+app.use('/image-view', proxy(config.proxies.images));
+
+app.use('/api/products/images', proxy(config.proxies.images, {
+  proxyReqPathResolver: (req) => {
+    const parts = req.url.split('?');
+    const queryString = parts[1];
+    return `/api/products/images${queryString ? `?${queryString}` : ''}`;
+  },
+}));
+
+// Description
+app.use('/product-description', proxy(config.proxies.description));
+
+app.use('/api/products/descriptions', proxy(config.proxies.description, {
+  proxyReqPathResolver: (req) => {
+    const parts = req.url.split('?');
+    const queryString = parts[1];
+    return `/api/products/descriptions${queryString ? `?${queryString}` : ''}`;
   },
 }));
 
