@@ -4,11 +4,12 @@ A clone of Amazon's Product web page.
 
 ![](CloneAzonDemo.gif)
 
-  ## Microservice Projects
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+## Related Microservice Projects
+  - https://github.com/hrden04/FEC-Modules-PLevin
+  - https://github.com/hrden04/FEC-Modules-MBoss
+  - https://github.com/hrden04/FEC-Modules-JGKapp
+  - https://github.com/hrden04/FEC-Modules-JGKapp-QnA
+  - https://github.com/hrden04/agcFecModulesJOxner
 
 ## Table of Contents
 
