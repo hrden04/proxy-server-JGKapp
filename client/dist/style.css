@@ -1,0 +1,8 @@
+.image-description-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#header-image {
+  margin-bottom: 10px;
+}
