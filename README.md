@@ -1,9 +1,10 @@
-# Project Name
+# CloneAzon
 
-> Project description
+A clone of Amazon's Product web page.
 
-## Related Projects
+![](CloneAzonDemo.gif)
 
+  ## Microservice Projects
   - https://github.com/teamName/repo
   - https://github.com/teamName/repo
   - https://github.com/teamName/repo
@@ -17,23 +18,25 @@
 
 ## Usage
 
-> Some usage instructions
+### Locally
+> `npm install` followed by `npm start`
+
+### Deployed to AWS
+> Update all of the AWS addresses in config.js before starting. Then run `docker-compose up -d`
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
 
 ## Development
+
+Use scripts `npm run react-dev` and `npm run server-dev` for development modes of server and webpack.
 
 ### Installing Dependencies
 
 From within the root directory:
 
-```sh
-npm install -g webpack
-npm install
-```
+`npm install`
 
